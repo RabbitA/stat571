@@ -5,11 +5,10 @@ t.test(s95, s100, conf.level = .95)
 library(pwr)
 pwr.2p.test(s95, s100)
 
-hist(s95, prob=T)
-curve(dnorm(x, mean=mean(s95), sd=sd(s95)), add=TRUE)
+hist(s95, prob=T, col="lightblue")
+lines(density(s95), col="darkblue", lwd=2)
+curve(dnorm(x, mean=mean(s95), sd=sd(s95)), add=TRUE, col="red", lwd=2)
 
-lines(density(s95))
-
-hist(s100)
-
-plot(density(s100))
+hist(s100, prob=T, col="lightblue")
+lines(density(s100), col="darkblue", lwd=2)
+curve(dnorm(x, mean=mean(s100), sd=sd(s100)), add=TRUE, col="red", lwd=2)
