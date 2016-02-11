@@ -1,0 +1,11 @@
+STAT 571B
+Homework 2
+Due: Wed, 2/17/2016
+
+Instructions: put all your work in a word (or equivalent) document and print it
+out for submission in class.
+1.  Montgomery 3.3
+2.  Montgomery 3.22 (skip part d)
+3.  Montgomery 3.23
+4.  Montgomery 3.28
+5.  Montgomery 3.51
