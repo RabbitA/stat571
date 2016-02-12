@@ -1,11 +1,57 @@
 STAT 571B
+Ken Youens-Clark
 Homework 2
 Due: Wed, 2/17/2016
 
-Instructions: put all your work in a word (or equivalent) document and print it
-out for submission in class.
 1.  Montgomery 3.3
+
+One-way ANOVA
+
+Source      DF      SS      MS      F       P
+Factor       3   36.15       ?      ?       ?
+Error        ?       ?       ?      ?
+Total       19  196.04
+
 2.  Montgomery 3.22 (skip part d)
+
+a) Do the three circuits have the same response time?
+
+> dat = read.delim("~/work/stat571/hw02/3.22.dat")
+> dat$circuit = factor(dat$circuit)
+> amod = aov(response ~ circuit, data=dat)
+> amod.sum = unlist(summary(amod))
+> amod.sum['Pr(>F)1']
+     Pr(>F)1 
+0.0004023258 
+
+P << α = 0.01, so reject H0 (no difference), response times are different 
+
+b) Tukey's test
+
+> TukeyHSD(amod, conf.level=0.99)
+  Tukey multiple comparisons of means
+    99% family-wise confidence level
+
+Fit: aov(formula = response ~ circuit, data = dat)
+
+$circuit
+     diff        lwr       upr     p adj
+2-1  11.4   2.123163 20.676837 0.0023656
+3-1  -2.4 -11.676837  6.876837 0.6367043
+3-2 -13.8 -23.076837 -4.523163 0.0005042
+
+c) graphical comparison
+
+e) Circuit 3 seems to have the lowest reponse time which would be desirable
+for a shutoff valve.
+
+f) 
+
+> plot(residuals(lm))
+
+Shows a random distribuion of residuals, so, yes, basic analysis of 
+variance assumptions are satisfied.
+
 3.  Montgomery 3.23
 4.  Montgomery 3.28
 5.  Montgomery 3.51
