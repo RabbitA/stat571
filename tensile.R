@@ -4,6 +4,9 @@ plot(lm)
 plot(strength ~ time, data=tensile.dat)
 
 lm.res = residuals(lm)
+plot(y=lm.res, x=tensile.dat$time)
+abline(0, 0)
+
 hist(lm.res)
 plot(lm.res)
 qqplot(y=lm.res, x=tensile.dat$strength)

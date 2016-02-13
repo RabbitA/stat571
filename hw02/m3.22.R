@@ -5,10 +5,15 @@ amod.sum = unlist(summary(amod))
 amod.sum['Pr(>F)1']
 
 TukeyHSD(amod, conf.level=0.99)
+plot(TukeyHSD(amod, conf.level=0.99))
 
 library("multcomp")
-tmod <- glht(aov,linfct=mcp(response="Tukey"))
-summary(tmod) 
+tuk <- glht(amod, linfct = mcp(circuit="Tukey"))
+summary(tuk) 
+tuk.cld <- cld(tuk)
+old.par <- par(mai=c(1,1,1.25,1), no.readonly = TRUE)
+plot(tuk.cld)
+par(old.par)
 
 lmod = lm(response ~ circuit, data=dat)
 plot(lmod)
