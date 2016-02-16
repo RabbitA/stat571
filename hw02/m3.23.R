@@ -11,6 +11,9 @@ amod = aov(life ~ fluid, data=dat)
 amod.sum = unlist(summary(amod))
 amod.sum['Pr(>F)1']
 
+tuk = TukeyHSD(amod, conf.level=0.95)
+plot(tuk)
+
 # b
 plot(life ~ fluid, data=dat)
 boxplot(life ~ fluid, data=dat, ylab = "Life", xlab = "Fluid")

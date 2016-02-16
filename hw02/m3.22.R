@@ -1,5 +1,5 @@
 dat = read.delim("~/work/stat571/hw02/3.22.dat")
-dat$circuit = factor(dat$circuit) # to turn integers into factors
+dat$circuit = as.factor(dat$circuit) # to turn integers into factors
 amod = aov(response ~ circuit, data=dat)
 amod.sum = unlist(summary(amod))
 amod.sum['Pr(>F)1']
@@ -19,7 +19,7 @@ lmod = lm(response ~ circuit, data=dat)
 plot(lmod)
 boxplot(response ~ circuit, data=dat, xlab="Circuit", ylab="Response")
 
-plot(residuals(lm), main="Residuals response ~ circuit")
+plot(residuals(lmod), main="Residuals response ~ circuit")
 abline(0,0)
 # c1 = c(9, 12, 10, 8, 15)
 # c2 = c(20, 21, 23, 17, 30)
