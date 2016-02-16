@@ -1,5 +1,5 @@
 dat = read.delim("~/work/stat571/hw02/3.22.dat")
-dat$circuit = factor(dat$circuit)
+dat$circuit = factor(dat$circuit) # to turn integers into factors
 amod = aov(response ~ circuit, data=dat)
 amod.sum = unlist(summary(amod))
 amod.sum['Pr(>F)1']

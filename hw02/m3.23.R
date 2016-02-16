@@ -3,12 +3,8 @@
 # help(reshape2)
 
 dat = read.delim("~/work/stat571/hw02/3.23.long.dat")
-dat$fluid = factor(dat$fluid)
+dat$fluid = factor(dat$fluid) # to turn integers into factors
 # summary(dat)
-
-# 
-# summary(lm)
-# plot(lm)
 
 # a
 amod = aov(life ~ fluid, data=dat)
