@@ -15,7 +15,8 @@ qqPlot(lmod, main="QQ Plot")
 boxplot(failure ~ material, data=dat)
 
 library('MASS')
-bc = boxcox(failure ~ material, data=dat)
+bc = boxcox(failure ~ material, data=dat, lambda = seq(-2, 2, .1))
+with(bc, x[which.max(y)])
 
 # c
 hist(dat$failure)
