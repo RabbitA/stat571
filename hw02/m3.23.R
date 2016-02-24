@@ -20,6 +20,7 @@ boxplot(life ~ fluid, data=dat, ylab = "Life", xlab = "Fluid")
 
 # c
 lmod = lm(life ~ fluid, data=dat)
+plot(lmod)
 plot(residuals(lmod), main="Residuals life ~ fluid")
 abline(0,0)
 
