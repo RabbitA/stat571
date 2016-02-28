@@ -1,5 +1,5 @@
 # leukemia data
-dat = read.csv("~/work/stat571/hw03/m4.12.dat")
+dat = read.csv("~/work/stat571/hw03/4.12.dat")
 dat$obs = factor(rep(1:10, 3))
 amod = aov(response ~ treatment + obs, data=dat)
 summary(amod)
