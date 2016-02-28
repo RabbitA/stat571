@@ -16,3 +16,6 @@ lm = aov(obs ~ operator + order + method, df)
 amod = anova(lm)
 plot(amod)
 summary(amod)
+
+plot(df$obs ~ df$operator)
+

@@ -8,6 +8,9 @@ plot(amod)
 
 dat$response.log = log(dat$response)
 amod.log = aov(response.log ~ treatment + obs, data=dat)
+shapiro.test(dat$response.log)
+
+
 summary(amod.log)
 plot(amod.log)
 
