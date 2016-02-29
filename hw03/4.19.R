@@ -8,3 +8,6 @@ df = data.frame(tip, coupon, response)
 matrix(df$response, 4, 4)
 amod = aov(response ~ tip + coupon, data=df)
 summary(amod)
+
+# Fisher LSD
+library(agricolae)
