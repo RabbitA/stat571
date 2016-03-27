@@ -1,0 +1,11 @@
+library(car)
+dat = read.csv("~/work/stat571/hw04/5.5.dat")
+dat$temperature = factor(dat$temperature)
+dat$pressure = factor(dat$pressure)
+
+lmod = lm(y~temperature+pressure, data=dat)
+qqPlot(resid(lmod))
+shapiro.test(dat$y)
+summary(aov(lmod))
+plot(formula=y~temperature+pressure, data=dat, ylab="Yield", main="yield ~ temp+pres")
+with(dat, interaction.plot(temperature, pressure, y))
