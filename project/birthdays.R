@@ -3,17 +3,37 @@ library(R.utils)
 dat = read.csv("~/work/stat571/project/birthdays.csv")
 birthdays = dat[-c(1)]
 birthdays$Day = factor(birthdays$Day)
-uniq = unique(birthdays[, c("Month", "Day")])
 
-nfound = 0
-for (i in 1:nrow(uniq)) {
-  uval = uniq[i,]
-  n = nrow(birthdays[ birthdays$Month == uval$Month & birthdays$Day == uval$Day, ])
-  
-  if (n > 1) {
-    printf("There are %s birthdays on %s %s\n", n, uval$Month, uval$Day)
-    nfound = nfound + 1
+find_shared = function (df) {
+  uniq = unique(df[, c("Month", "Day")])
+  nfound = 0
+  for (i in 1:nrow(uniq)) {
+    uval = uniq[i,]
+    n = nrow(df[ df$Month == uval$Month & df$Day == uval$Day, ])
+    
+    if (n > 1) {
+      nfound = nfound + 1
+    }
   }
+  return(nfound)
 }
 
-printf("In %s samples, we found %s shared birthdays.", nrow(birthdays), nfound)
+replications = 10
+for (sample.size in c(5,10,15,20,25,30,35,40)) {
+  found = numeric(replications)
+  for (i in 1:replications) {
+    found[i] = find_shared(birthdays[sample(1:nrow(birthdays), sample.size, F), ])
+  }
+  
+  if (all(found==0)) {
+    printf("None found for sample size %s\n", sample.size)
+  }
+  
+  for (n in unique(found[found > 0])) {
+    printf("Sample size %s, %s found %s%%\n", 
+           sample.size, 
+           n, 
+           sum(found==n)/length(found) * 100
+           )
+  }
+}
