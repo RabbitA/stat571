@@ -1,0 +1,4 @@
+1.  Montgomery 6.15
+2.  Montgomery 6.16
+3.  Montgomery 6.26 (skip part h)
+4.  Montgomery 7.2
