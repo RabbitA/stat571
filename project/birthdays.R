@@ -19,7 +19,7 @@ find_shared = function (df) {
 }
 
 replications = 10
-for (sample.size in c(5,10,15,20,25,30,35,40)) {
+for (sample.size in seq(5,nrow(birthdays),5)) {
   found = numeric(replications)
   for (i in 1:replications) {
     found[i] = find_shared(birthdays[sample(1:nrow(birthdays), sample.size, F), ])
@@ -29,7 +29,7 @@ for (sample.size in c(5,10,15,20,25,30,35,40)) {
     printf("None found for sample size %s\n", sample.size)
   }
   
-  for (n in unique(found[found > 0])) {
+  for (n in sort(unique(found[found > 0]))) {
     printf("Sample size %s, %s found %s%%\n", 
            sample.size, 
            n, 
