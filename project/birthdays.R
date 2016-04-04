@@ -20,6 +20,7 @@ find_shared = function (df) {
 
 replications = 10
 for (sample.size in seq(5,nrow(birthdays),5)) {
+#for (sample.size in seq(5,30,5)) {
   found = numeric(replications)
   for (i in 1:replications) {
     found[i] = find_shared(birthdays[sample(1:nrow(birthdays), sample.size, F), ])
