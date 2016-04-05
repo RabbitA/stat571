@@ -11,6 +11,8 @@ options(show.signif.stars=FALSE)
 summary(aov(r ~ block + A * B, df))
 
 lmod = aov(r ~ block + A * B, df)
+wireframe(r ~ block + A * B, df)
+
 amod = aov(lmod.block)
 summary(amod)
 model.tables(amod)

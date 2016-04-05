@@ -20,3 +20,21 @@ lmod = lm(r ~ A + B + D + A*B, df)
 summary(lmod)
 coefficients(lmod)
 cor.test(A, B, D))
+
+library(lattice)
+model.one = function (x, y) {
+  10.19006 - (0.498 * x) + (1.988 * y)
+}
+model.zero = function (x, y) {
+  11.98806 + (1.509 * x) + (1.988 * y)
+}
+
+a = seq(-1, 1, 0.1)
+b = seq(-1, 1, 0.1)
+
+par(mfcol=c(1,2))
+z.one = outer(a, b, model.one)
+contour(a, b, z.one, main="Contour c=1", xlab="temp", ylab="Ti")
+z.zero = outer(a, b, model.zero)
+contour(a, b, z.zero, main="Contour c=0", xlab="temp", ylab="Ti")
+

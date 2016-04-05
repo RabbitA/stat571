@@ -20,25 +20,29 @@ dat = data.frame(cbind(exp, r=reps, Total))
 n = 2; A = dat$A; B = dat$B; C = dat$C; D = dat$D;
 AB = A*B; AC = A*C; AD = A*D; BC = B*C;
 BD = B*D; CD = C*D; ABC = A*B*C; ABD = A*B*D; BCD = B*C*D
+effects = data.frame(e=t(Total %*% cbind(A,B,C,D,AB,AC,AD,BC,CD,ABC,ABD,BCD)/(8*n)))
+effects$half = effects$e/2
+effects
 
-Aeff = (Total %*% A)/(8*n)
-Beff = (Total %*% B)/(8*n)
-Ceff = (Total %*% C)/(8*n)
-Deff = (Total %*% D)/(8*n)
-ABeff = (Total %*% AB)/(8*n)
-ACeff = (Total %*% AC)/(8*n)
-ADeff = (Total %*% AD)/(8*n)
-BCeff = (Total %*% BC)/(8*n)
-BDeff = (Total %*% BD)/(8*n)
-CDeff = (Total %*% CD)/(8*n)
-ABCeff = (Total %*% ABC)/(8*n)
-ABDeff = (Total %*% ABD)/(8*n)
-ABDeff = (Total %*% ABD)/(8*n)
-Effects = Total %*% cbind(A,B,C,D,AB,AC,AD,BC,CD,ABC,ABD,BCD)/(8*n)
-t(Effects)
 
-reg.df = data.frame(e=t(Effects))
-reg.df$x = reg.df$e/2
+# calc_effect = function (v) { return((Total %*% A)/(8*n))}
+# 
+# Aeff   = calc_effect(A)
+# Beff   = calc_effect(B)
+# Ceff   = calc_effect(C)
+# Deff   = calc_effect(D)
+# ABeff  = calc_effect(AB)
+# ACeff  = calc_effect(AC)
+# ADeff  = calc_effect(AD)
+# BCeff  = calc_effect(BC)
+# BDeff  = calc_effect(BD)
+# CDeff  = calc_effect(CD)
+# ABCeff = calc_effect(ABC)
+# ABDeff = calc_effect(ABD)
+# ABDeff = calc_effect(ABD)
+
+
+
 
 # plot to find which effects are most significant
 df = data.frame(rbind(cbind(exp, r=reps[,1]), cbind(exp, r=reps[,2])))
@@ -49,6 +53,7 @@ lmod = lm(r ~ A * B * C * D, df)
 DanielPlot(lmod)
 summary(lmod)
 
+options(show.signif.stars=FALSE)
 amod = aov(lmod)
 summary(amod)
 
@@ -78,10 +83,14 @@ coeftest(amod)
 coef(summary(amod))
 mod = glm(r ~ A * B * C * D, data=dat)
 
+# find effects of factors part (e)
+A.amod = aov(r ~ A, df)
+plot(predict(A.amod), resid(A.amod))
+
 dat$range = abs(dat$r.1 - dat$r.2)
 lm.range = lm(range ~ A + B + C + D + A*C + C*D, dat)
 qqnorm(resid(lm.range))
-DanielPlot(lm.range)
-amod.range = aov(range ~ A*B*C*D, dat)
+boxplot(range ~ A * B * C * D, dat)
+amod.range = aov(range ~ A * B * C * D, dat)
 summary(amod.range)
 qqnorm(resid(amod.range))
