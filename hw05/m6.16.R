@@ -9,7 +9,7 @@ reps = matrix(
     6.376, 15.219, 12.089, 17.815, 10.151, 4.098, 9.253, 12.923, 
     8.951, 17.052, 13.658, 19.639, 12.337, 5.904, 10.935, 15.053),
   ncol=2
-)
+) 
 Total <- apply(reps,1,sum)
 exp = expand.grid(A=levels, B=levels, C=levels, D=levels)
 

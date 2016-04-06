@@ -42,8 +42,6 @@ effects
 # ABDeff = calc_effect(ABD)
 
 
-
-
 # plot to find which effects are most significant
 df = data.frame(rbind(cbind(exp, r=reps[,1]), cbind(exp, r=reps[,2])))
 for (v in vars) {
@@ -57,11 +55,12 @@ options(show.signif.stars=FALSE)
 amod = aov(lmod)
 summary(amod)
 
-plot(predict(amod), resid(amod))
-abline(h=0)
+par(mfcol=c(1,2))
+plot(predict(amod), resid(amod), main="Pred v Resid")
+abline(h=0, col="red")
 
 qqnorm(resid(amod))
-qqline(resid(amod))
+qqline(resid(amod), col="red")
 
 library("DoE.base")
 library("FrF2")
@@ -84,6 +83,14 @@ coef(summary(amod))
 mod = glm(r ~ A * B * C * D, data=dat)
 
 # find effects of factors part (e)
+par(mfcol=c(2,2))
+for (v in vars) {
+  plot(rep(dat[[v]], 1, each=2), resid(lmod), 
+       main=sprintf("Res vs %s", v), xlab=v, ylab="Resid")
+  abline(h=0, col="red")
+}
+
+
 A.amod = aov(r ~ A, df)
 plot(predict(A.amod), resid(A.amod))
 
