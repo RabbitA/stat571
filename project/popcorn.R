@@ -4,7 +4,7 @@ unpopped = c(332,338,320,389,398,411,88,113,88,277,268,283,379,381,
 additive = c(rep("none", 9), rep("olive", 9), rep("butter", 9))
 power = rep(c(rep("900", 3), rep("1000", 3), rep("1200", 3)), 3)
 dat = data.frame(additives, power, unpopped)
-mod = aov(unpopped ~ additive + power, dat)
+mod = aov(unpopped ~ additive * power, dat)
 options(show.signif.stars=FALSE)
 summary(mod)
 
